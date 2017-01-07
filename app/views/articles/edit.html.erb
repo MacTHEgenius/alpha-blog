@@ -1,7 +1,7 @@
-<h1>Create an article</h1>
+<h1>Edit existing article</h1>
 
 <% if @article.errors.any? %>
-    <h2 style="color: red">Errors</h2>
+    <h3 style="color: red">Errors</h3>
     <ul>
       <% @article.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
