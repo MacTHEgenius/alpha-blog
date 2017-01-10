@@ -12,6 +12,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  # GET /users
+
+  def index
+    @users = User.all
+  end
+
   # POST /users
 
   def create

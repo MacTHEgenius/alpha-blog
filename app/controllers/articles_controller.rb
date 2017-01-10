@@ -13,7 +13,7 @@ class ArticlesController < ApplicationController
     #@article = Article.find(params[:id])
   end
 
-  # GET /articles/
+  # GET /articles
 
   def index
     @articles = Article.all
