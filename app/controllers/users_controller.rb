@@ -27,9 +27,9 @@ class UsersController < ApplicationController
   # /users/:id
 
   # GET
-  #def show
-  #
-  #end
+  def show
+    @user = User.find(params[:id])
+  end
 
   # POST - PATCH
   def update
