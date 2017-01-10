@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   # GET /users
 
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page], per_page: 5)
   end
 
   # POST /users
@@ -35,6 +35,7 @@ class UsersController < ApplicationController
   # GET
   def show
     @user = User.find(params[:id])
+    @user_articles = @user.articles.paginate(page: params[:page], per_page: 5)
   end
 
   # POST - PATCH
