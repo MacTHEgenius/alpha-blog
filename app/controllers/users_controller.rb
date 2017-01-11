@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :get_user, only: [:edit, :update, :show]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :require_admin, only: [:destroy]
 
   # GET /signup (/users/new)
 
@@ -49,6 +50,16 @@ class UsersController < ApplicationController
     end
   end
 
+  # DELETE
+  def destroy
+    @user = User.find(params[:id])
+    username = @user.username
+    count = @user.articles.count
+    @user.destroy
+    flash[:danger] = "#{username}'s account and his article#{count > 1 ? 's' : ''} have been deleted"
+    redirect_to users_path
+  end
+
   private
     def user_params
       params.require(:user).permit(:username, :email, :password)
@@ -59,8 +70,15 @@ class UsersController < ApplicationController
     end
 
     def require_same_user
-      if current_user != @user
+      if current_user != @user and !current_user.admin?
         flash[:danger] = "You can only edit your own account"
+        redirect_to root_path
+      end
+    end
+
+    def require_admin
+      if logged_in? and !current_user.admin?
+        flash[:danger] = "Only admins can perform this action"
         redirect_to root_path
       end
     end
