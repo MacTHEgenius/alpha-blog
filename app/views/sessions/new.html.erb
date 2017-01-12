@@ -22,11 +22,9 @@
 
   <div class="form-group">
     <div class="col-sm-offset-4 col-sm-10">
+      <%= link_to 'Cancel', root_path, class: 'btn btn-danger btn-sm' %>
       <%= f.submit 'Log in', class: 'btn btn-primary btn-sm' %>
     </div>
   </div>
 
 <% end %>
-<div class="col-xs-4 col-xs-offset-4">
-  [ <%= link_to 'Cancel request and return to articles listing', articles_path %> ]
-</div>
